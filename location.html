@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل حضور مع الموقع</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    function redirectWithLocation(lat, lng) {
+      const location = `${lat},${lng}`;
+      const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSe_8roKU7NbbvVo1JoV00zG1ZrNwM2MVOlv49Bd1EZGj9BOCw/viewform";
+      const fullURL = `${formURL}?usp=pp_url&entry.1311153590=${encodeURIComponent(location)}`;
+      window.location.href = fullURL;
+    }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          pos => redirectWithLocation(pos.coords.latitude, pos.coords.longitude),
+          err => alert("⚠️ فشل تحديد الموقع: " + err.message)
+        );
+      } else {
+        alert("⚠️ المتصفح لا يدعم تحديد الموقع.");
+      }
+    }
+
+    window.onload = getLocation;
+  </script>
+</head>
+<body>
+  <h2 style="text-align:center;margin-top:50px;">📍 جاري تحديد موقعك... الرجاء الانتظار</h2>
+</body>
+</html>
